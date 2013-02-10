@@ -95,10 +95,10 @@
 		FDABBA7B16BF5ACB00D41D86 /* Matchismo */ = {
 			isa = PBXGroup;
 			children = (
-				FDABBA8D16BF5ACB00D41D86 /* MainStoryboard.storyboard */,
 				FDB28DA016BF647F000DE1A0 /* Model */,
 				FDABBA9016BF5ACB00D41D86 /* CardGameViewController.h */,
 				FDABBA9116BF5ACB00D41D86 /* CardGameViewController.m */,
+				FDABBA8D16BF5ACB00D41D86 /* MainStoryboard.storyboard */,
 				FDABBA7C16BF5ACB00D41D86 /* Supporting Files */,
 			);
 			path = Matchismo;
