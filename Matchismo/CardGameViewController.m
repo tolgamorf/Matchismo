@@ -30,12 +30,6 @@
 }
 
 
-// Lazy instantiation of deck
-//- (Deck *)deck {
-//    if (!_deck) _deck = [[PlayingCardDeck alloc] init];
-//    return _deck;
-//}
-
 - (void) updateUI {
     for (UIButton *cardButton in self.cardButtons) {
         Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
