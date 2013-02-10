@@ -14,7 +14,7 @@
 @property (nonatomic) int flipCount;
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UIButton *dealButton;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *gameModeSwitch;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *gameModeSegmentedControl;
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
@@ -28,7 +28,7 @@
     if (!_game) {
         _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                                                   usingDeck:[[PlayingCardDeck alloc] init]];
-        self.gameModeSwitch.enabled = YES;
+        self.gameModeSegmentedControl.enabled = YES;
     }
     return _game;
 }
@@ -42,9 +42,10 @@
         cardButton.selected = card.isFaceUp;
         cardButton.enabled = !card.isUnplayable;
         cardButton.alpha = (card.isUnplayable ? 0.3 : 1.0);
+        [cardButton setImage:(card.isFaceUp ? nil : [UIImage imageNamed:@"CardBackground.png"]) forState:UIControlStateNormal];
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-    self.resultLabel.text = self.game.resultText;
+    self.resultLabel.text = self.game.descriptionOfLastFlip;
 }
 
 - (void)setCardButtons:(NSArray *)cardButtons {
@@ -61,12 +62,12 @@
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     self.flipCount++;
     [self updateUI];
-    self.gameModeSwitch.enabled = NO;
+    self.gameModeSegmentedControl.enabled = NO;
 }
 
 - (IBAction)reDealCards:(id)sender {
     self.game = nil;
+    self.flipCount = 0;
     [self updateUI];
 }
-
 @end

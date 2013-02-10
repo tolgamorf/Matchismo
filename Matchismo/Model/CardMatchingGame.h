@@ -13,7 +13,7 @@
 @interface CardMatchingGame : NSObject
 
 @property (readonly, nonatomic) int score;
-@property (nonatomic) NSString *resultText;
+@property (nonatomic) NSString *descriptionOfLastFlip;
 
 // designated initializer
 - (id)initWithCardCount:(NSUInteger)count
