@@ -9,6 +9,7 @@
 #import "CardGameViewController.h"
 #import "PlayingCardDeck.h"
 #import "CardMatchingGame.h"
+#import "GameResult.h"
 
 @interface CardGameViewController ()
 @property (nonatomic) int flipCount;
@@ -19,9 +20,16 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (strong, nonatomic) GameResult *gameResult;
 @end
 
 @implementation CardGameViewController
+
+// Lazy instantiation of GameResult
+- (GameResult *)gameResult {
+    if (!_gameResult) _gameResult = [[GameResult alloc] init];
+    return _gameResult;
+}
 
 // Lazy instantiation of CardMatchingGame
 - (CardMatchingGame *)game {
@@ -62,11 +70,13 @@
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     self.flipCount++;
     [self updateUI];
+    self.gameResult.score = self.game.score;
     self.gameModeSegmentedControl.enabled = NO;
 }
 
 - (IBAction)reDealCards:(id)sender {
     self.game = nil;
+    self.gameResult = nil;
     self.flipCount = 0;
     [self updateUI];
 }
