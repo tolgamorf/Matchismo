@@ -11,7 +11,7 @@
 #import "CardMatchingGame.h"
 #import "GameResult.h"
 
-@interface CardGameViewController ()
+@interface CardGameViewController () <UICollectionViewDataSource>
 @property (nonatomic) int flipCount;
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UIButton *dealButton;
@@ -24,6 +24,25 @@
 @end
 
 @implementation CardGameViewController
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.startingCardCount;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PlayingCard" forIndexPath:indexPath];
+    Card *card = [self.game cardAtIndex:indexPath.item];
+    [self updateCell:cell usingCard:card animate:YES];
+    return cell;
+}
+
+- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card animate:(BOOL)animate {
+    // abstract
+}
 
 // Lazy instantiation of GameResult
 - (GameResult *)gameResult {
@@ -46,6 +65,12 @@
 }
 
 - (void) updateUI {
+    for (UICollectionViewCell *cell in [self.cardCollectionView visibleCells]) {
+        NSIndexPath *indexPath = [self.cardCollectionView indexPathForCell:cell];
+        Card *card = [self.game cardAtIndex:indexPath.item];
+        [self updateCell:cell usingCard:card animate:NO];
+    }
+    
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     self.resultLabel.text = self.game.descriptionOfLastFlip;
 }
@@ -55,13 +80,21 @@
     self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
 }
 
-- (IBAction)flipCard:(UIButton *)sender {
-    int index = 0; // ????
-    [self.game flipCardAtIndex:index];
-    self.flipCount++;
-    [self updateUI];
-    self.gameResult.score = self.game.score;
-    self.gameModeSegmentedControl.enabled = NO;
+- (IBAction)flipCard:(UITapGestureRecognizer *)gesture {
+    CGPoint tapLocation = [gesture locationInView:self.cardCollectionView];
+    NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:tapLocation];
+    if (indexPath) {
+        [self.game flipCardAtIndex:indexPath.item];
+
+        UICollectionViewCell *cell = [self.cardCollectionView cellForItemAtIndexPath:indexPath];
+        Card *card = [self.game cardAtIndex:indexPath.item];
+        [self updateCell:cell usingCard:card animate:YES];
+        
+        self.flipCount++;
+        [self updateUI];
+        self.gameResult.score = self.game.score;
+        self.gameModeSegmentedControl.enabled = NO;
+    }
 }
 
 - (IBAction)reDealCards:(id)sender {
