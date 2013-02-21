@@ -40,7 +40,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="reDealCards:" destination="2" eventType="touchUpInside" id="Dax-c0-EhC"/>
+                                    <action selector="reDealCards" destination="2" eventType="touchUpInside" id="AW1-eX-YgP"/>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="KeA-7d-3c9">
@@ -48,6 +48,9 @@
                                     <segment title="2"/>
                                     <segment title="3"/>
                                 </segments>
+                                <connections>
+                                    <action selector="notImplemented" destination="2" eventType="valueChanged" id="Nei-tN-dzQ"/>
+                                </connections>
                             </segmentedControl>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fe2-ZH-JPi">
                                 <color key="backgroundColor" red="0.00049798243536674136" green="0.50240669431279628" blue="0.16791058485947488" alpha="1" colorSpace="calibratedRGB"/>

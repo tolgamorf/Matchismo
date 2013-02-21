@@ -7,7 +7,6 @@
 //
 
 #import "CardGameViewController.h"
-//#import "PlayingCardDeck.h"
 #import "CardMatchingGame.h"
 #import "GameResult.h"
 
@@ -29,6 +28,10 @@
 @end
 
 @implementation CardGameViewController
+- (IBAction)notImplemented {
+    [self showNotImplementedAlert];
+    self.gameModeSegmentedControl.selectedSegmentIndex = 0;
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
@@ -82,6 +85,9 @@
     } else {
         self.resultLabel.text = @" ";
     }
+    if ([self.game gameOver]) {
+        [self showGameOverAlert];
+    }
 }
 
 - (void)setFlipCount:(int)flipCount {
@@ -106,8 +112,7 @@
         self.gameModeSegmentedControl.enabled = NO;
     }
 }
-
-- (IBAction)reDealCards:(id)sender {
+- (IBAction)reDealCards {
     self.game = nil;
     self.gameResult = nil;
     self.flipCount = 0;
@@ -116,6 +121,46 @@
 
 - (void)viewDidLoad {
     [self updateUI];
+}
+
+
+- (void)showGameOverAlert
+{
+	UIAlertView *alert = [[UIAlertView alloc] init];
+    [alert setTag:1];
+	[alert setTitle:@"Game over"];
+	[alert setMessage:@"Current game is over. Do you want to start a new one?"];
+	[alert setDelegate:self];
+	[alert addButtonWithTitle:@"Yes"];
+	[alert addButtonWithTitle:@"No"];
+	[alert show];
+}
+
+- (void)showNotImplementedAlert
+{
+	UIAlertView *alert = [[UIAlertView alloc] init];
+    [alert setTag:999];
+	[alert setTitle:@"Feature not implemented"];
+	[alert setMessage:@"This feature is not yet implemented. It will allow you to match 3 cards instead of 2. I might add another tab and remove this control."];
+	[alert setDelegate:self];
+	[alert addButtonWithTitle:@"OK"];
+	[alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1) {
+        if (buttonIndex == 0)
+        {
+            // Re-deal cards
+            [self reDealCards];
+        }
+        else if (buttonIndex == 1)
+        {
+            // Turn off game over alert
+            self.game.gameOverAlert = NO;
+        }
+    }
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation duration:(NSTimeInterval)duration

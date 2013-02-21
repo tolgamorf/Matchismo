@@ -7,10 +7,11 @@
 //
 
 #import "CardMatchingGame.h"
+#import "PlayingCard.h"
 
 @interface CardMatchingGame()
 @property (readwrite, nonatomic) int score; // Even though readwrite is default, use it for readibility in private implementation
-@property (strong, nonatomic) NSMutableArray *cards; // of Card
+@property (readwrite, strong, nonatomic) NSMutableArray *cards; // of Card
 @end
 
 
@@ -76,8 +77,31 @@
             }
         }
     }
-    
+    _gameOverAlert = YES;
     return self;
+}
+
+- (BOOL)gameOver {
+    BOOL gameIsOver = NO;
+    
+    if (self.gameOverAlert) {
+        NSMutableArray *unplayableCardContents = [[NSMutableArray alloc] init];
+        for (PlayingCard *card in self.cards) {
+            if (!card.isUnplayable) {
+                [unplayableCardContents addObject:card.suit];
+                [unplayableCardContents addObject:[NSString stringWithFormat:@"%i", (int)card.rank]];
+            }
+        }
+
+        if ([unplayableCardContents count] <= 8) {
+            gameIsOver = YES;
+            NSCountedSet *set = [[NSCountedSet alloc] initWithArray:unplayableCardContents];
+            for (id item in set) {
+                if ([set countForObject:item] > 1) gameIsOver = NO;
+            }
+        }
+    }
+    return gameIsOver;
 }
 
 @end

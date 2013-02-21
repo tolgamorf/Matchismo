@@ -17,7 +17,7 @@
 
 @implementation GameResultViewController
 - (IBAction)resetGameResults:(id)sender {
-    [self showConfirmAlert];
+    [self showResetScoresConfirmAlert];
 }
 
 - (IBAction)sortScores:(UIButton *)sender {
@@ -77,11 +77,11 @@
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
-- (void)showConfirmAlert
+- (void)showResetScoresConfirmAlert
 {
 	UIAlertView *alert = [[UIAlertView alloc] init];
 	[alert setTitle:@"Reset game scores"];
-	[alert setMessage:@"Do you want to erase all the game scores?"];
+	[alert setMessage:@"Do you want to clear all the game scores?"];
 	[alert setDelegate:self];
 	[alert addButtonWithTitle:@"Yes"];
 	[alert addButtonWithTitle:@"No"];
@@ -92,14 +92,16 @@
 {
 	if (buttonIndex == 0)
 	{
+        // Clear scoreboard
         [GameResult resetAllGameResults];
         [self updateUIandSortGameResultsBy:nil ascending:NO];
 	}
 	else if (buttonIndex == 1)
 	{
+        // Do nothing
 	}
 }
-     
+
 - (void)viewDidLoad
 {
     [self makeItPrettyWithButton:[self resetButton]];

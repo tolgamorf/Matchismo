@@ -13,12 +13,14 @@
 @interface CardMatchingGame : NSObject
 
 @property (readonly, nonatomic) int score;
+@property (readonly, strong, nonatomic) NSMutableArray *cards; // of Card
 @property (nonatomic) NSString *descriptionOfLastFlip;
+@property (nonatomic) BOOL gameOverAlert;
 
 // designated initializer
 - (id)initWithCardCount:(NSUInteger)count
               usingDeck:(Deck *)deck;
 - (void)flipCardAtIndex:(NSUInteger)index;
 - (Card *)cardAtIndex:(NSUInteger)index;
-
+- (BOOL)gameOver;
 @end
