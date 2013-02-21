@@ -164,8 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				FD97010E16C7BBDA00BC7318 /* Artwork */,
-				FD0017F916CE40E2009C1573 /* GameResult.h */,
-				FD0017FA16CE40E2009C1573 /* GameResult.m */,
 				FDABBA8D16BF5ACB00D41D86 /* MainStoryboard.storyboard */,
 				FDB28DA016BF647F000DE1A0 /* Model */,
 				FD00184E16D2063B009C1573 /* PlayingCardCollectionViewCell.h */,
@@ -200,6 +198,8 @@
 				FD97010A16C76E7B00BC7318 /* CardMatchingGame.m */,
 				FDB28D9D16BF6424000DE1A0 /* Deck.h */,
 				FDB28D9E16BF6424000DE1A0 /* Deck.m */,
+				FD0017F916CE40E2009C1573 /* GameResult.h */,
+				FD0017FA16CE40E2009C1573 /* GameResult.m */,
 				FDB28DA116BF66ED000DE1A0 /* PlayingCard.h */,
 				FDB28DA216BF66ED000DE1A0 /* PlayingCard.m */,
 				FDB28DA416BF6700000DE1A0 /* PlayingCardDeck.h */,

@@ -97,7 +97,8 @@
 
         UICollectionViewCell *cell = [self.cardCollectionView cellForItemAtIndexPath:indexPath];
         Card *card = [self.game cardAtIndex:indexPath.item];
-        [self updateCell:cell usingCard:card animate:YES];
+        
+        if (!card.isUnplayable) [self updateCell:cell usingCard:card animate:YES];
         
         self.flipCount++;
         [self updateUI];
