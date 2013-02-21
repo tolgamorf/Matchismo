@@ -21,6 +21,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (strong, nonatomic) GameResult *gameResult;
 @property (weak, nonatomic) IBOutlet UICollectionView *cardCollectionView;
+
+
+@property (strong, nonatomic) UICollectionViewFlowLayout *portraitLayout;
+@property (strong, nonatomic) UICollectionViewFlowLayout *landscapeLayout;
+
 @end
 
 @implementation CardGameViewController
@@ -72,7 +77,11 @@
     }
     
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-    self.resultLabel.text = self.game.descriptionOfLastFlip;
+    if (self.game.descriptionOfLastFlip) {
+        self.resultLabel.text = self.game.descriptionOfLastFlip;
+    } else {
+        self.resultLabel.text = @" ";
+    }
 }
 
 - (void)setFlipCount:(int)flipCount {
@@ -103,4 +112,26 @@
     self.flipCount = 0;
     [self updateUI];
 }
+
+- (void)viewDidLoad {
+    [self updateUI];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation duration:(NSTimeInterval)duration
+{        
+        switch (interfaceOrientation) {
+            case UIInterfaceOrientationPortrait:
+                NSLog(@"Portrait");
+                break;
+                
+            case UIInterfaceOrientationLandscapeLeft:
+            case UIInterfaceOrientationLandscapeRight:
+                NSLog(@"LandscapeLeft or LandscapeRight");
+                break;
+                
+            default:
+                break;
+        }
+}
+
 @end

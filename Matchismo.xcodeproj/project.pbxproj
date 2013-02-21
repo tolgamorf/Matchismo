@@ -16,6 +16,8 @@
 		FD00184D16D205A3009C1573 /* PlayingCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD00184C16D205A3009C1573 /* PlayingCardView.m */; };
 		FD00185016D2063B009C1573 /* PlayingCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD00184F16D2063B009C1573 /* PlayingCardCollectionViewCell.m */; };
 		FD00185316D208F1009C1573 /* PlayingCardGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD00185216D208F1009C1573 /* PlayingCardGameViewController.m */; };
+		FD4F2EAD16D6466B008D49A8 /* button_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD4F2EAB16D6466B008D49A8 /* button_red@2x.png */; };
+		FD4F2EAE16D6466B008D49A8 /* button_red.png in Resources */ = {isa = PBXBuildFile; fileRef = FD4F2EAC16D6466B008D49A8 /* button_red.png */; };
 		FD97010B16C76E7B00BC7318 /* CardMatchingGame.m in Sources */ = {isa = PBXBuildFile; fileRef = FD97010A16C76E7B00BC7318 /* CardMatchingGame.m */; };
 		FD97011D16C7BBF500BC7318 /* cardback.png in Resources */ = {isa = PBXBuildFile; fileRef = FD97010F16C7BBF500BC7318 /* cardback.png */; };
 		FDABBA7616BF5ACB00D41D86 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDABBA7516BF5ACB00D41D86 /* UIKit.framework */; };
@@ -52,6 +54,8 @@
 		FD00184F16D2063B009C1573 /* PlayingCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardCollectionViewCell.m; sourceTree = "<group>"; };
 		FD00185116D208F1009C1573 /* PlayingCardGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingCardGameViewController.h; sourceTree = "<group>"; };
 		FD00185216D208F1009C1573 /* PlayingCardGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardGameViewController.m; sourceTree = "<group>"; };
+		FD4F2EAB16D6466B008D49A8 /* button_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_red@2x.png"; sourceTree = "<group>"; };
+		FD4F2EAC16D6466B008D49A8 /* button_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_red.png; sourceTree = "<group>"; };
 		FD97010916C76E7B00BC7318 /* CardMatchingGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardMatchingGame.h; path = Model/CardMatchingGame.h; sourceTree = "<group>"; };
 		FD97010A16C76E7B00BC7318 /* CardMatchingGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardMatchingGame.m; path = Model/CardMatchingGame.m; sourceTree = "<group>"; };
 		FD97010F16C7BBF500BC7318 /* cardback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cardback.png; path = Artwork/cardback.png; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 		FD97010E16C7BBDA00BC7318 /* Artwork */ = {
 			isa = PBXGroup;
 			children = (
+				FD4F2EAB16D6466B008D49A8 /* button_red@2x.png */,
+				FD4F2EAC16D6466B008D49A8 /* button_red.png */,
 				FD97010F16C7BBF500BC7318 /* cardback.png */,
 				FDDA555016C7C03700E5C754 /* Default-568h@2x.png */,
 				FDDA554C16C7C02C00E5C754 /* Default.png */,
@@ -266,6 +272,8 @@
 				FD00180116CE50F3009C1573 /* TabBarGameScores.png in Resources */,
 				FD00180416CE524D009C1573 /* TabBarGameScores@2x.png in Resources */,
 				FD00180516CE524D009C1573 /* TabBarMatchismo@2x.png in Resources */,
+				FD4F2EAD16D6466B008D49A8 /* button_red@2x.png in Resources */,
+				FD4F2EAE16D6466B008D49A8 /* button_red.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,10 +10,15 @@
 
 @interface GameResult : NSObject
 
+@property (nonatomic) int score;
 @property (readonly, nonatomic) NSDate *start;
 @property (readonly, nonatomic) NSDate *end;
 @property (readonly, nonatomic) NSTimeInterval duration;
-@property (nonatomic) int score;
+@property (readonly, nonatomic) NSString *durationFormatted;
+@property (readonly, nonatomic) NSString *endDateTimeFormatted;
 
-+ (NSArray *)allGameResults;
++ (NSArray *)allGameResultsSortedByProperty:(NSString *)sortProperty ascending:(BOOL)sortOrderAscending;
+
++ (void)resetAllGameResults;
+
 @end
