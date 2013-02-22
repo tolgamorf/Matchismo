@@ -32,7 +32,8 @@
         [allGameResults addObject:result];
     }
 
-    if (!sortProperty) sortProperty = @"end";
+    if (!sortProperty) sortProperty = [[NSString alloc] initWithFormat:@"end"];
+//    NSLog(@"sortProperty: %@", sortProperty);
     
     NSSortDescriptor *sortDescriptor;
     sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortProperty ascending:sortOrderAscending];

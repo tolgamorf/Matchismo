@@ -10,12 +10,14 @@
 #import "GameResult.h"
 
 @interface GameResultViewController ()
-@property (weak, nonatomic) IBOutlet UITextView *display;
+@property (strong, nonatomic) NSString *sortProperty;
 @property (nonatomic) BOOL sortOrderAscending;
 @property (weak, nonatomic) IBOutlet UIButton *resetButton;
+@property (weak, nonatomic) IBOutlet UITableView *gameResultsTableView;
 @end
 
 @implementation GameResultViewController
+
 - (IBAction)resetGameResults:(id)sender {
     [self showResetScoresConfirmAlert];
 }
@@ -25,31 +27,23 @@
     self.sortOrderAscending = !self.sortOrderAscending;
     
     if ([sender.currentTitle isEqualToString:@"Score"]) {
-        [self updateUIandSortGameResultsBy:@"score" ascending:self.sortOrderAscending];
+        self.sortProperty = @"score";
     } else if ([sender.currentTitle isEqualToString:@"Duration"]) {
-        [self updateUIandSortGameResultsBy:@"duration" ascending:self.sortOrderAscending];
+        self.sortProperty = @"duration";
     } else {
-        [self updateUIandSortGameResultsBy:@"end" ascending:self.sortOrderAscending];
+        self.sortProperty = @"end";
     }
+    [self.gameResultsTableView reloadData];
 }
 
-- (void)updateUIandSortGameResultsBy:(NSString *)sortProperty ascending:(BOOL)sortOrderAscending {
-    NSString *displayText = @"";
-    
-    for (GameResult *result in [GameResult allGameResultsSortedByProperty:sortProperty ascending:sortOrderAscending]) {
-        displayText = [displayText stringByAppendingFormat:@"Score: %d (%@, %@)\n", result.score, result.endDateTimeFormatted, result.durationFormatted];
-    }
-    if ([displayText isEqualToString:@""]) {
-        displayText = @"No scores to view";
-    }
-    
-    self.display.text = displayText;
-
+- (NSString *)sortProperty {
+    if (!_sortProperty) _sortProperty = [[NSString alloc] initWithFormat:@"end"];
+    return _sortProperty;
 }
 
-- (void)viewWillAppear:(BOOL)animated {    
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self updateUIandSortGameResultsBy:nil ascending:self.sortOrderAscending];
+    [self.gameResultsTableView reloadData];
 }
 
 - (void)setup {
@@ -90,29 +84,45 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	if (buttonIndex == 0)
-	{
+	if (buttonIndex == 0) {
         // Clear scoreboard
         [GameResult resetAllGameResults];
-        [self updateUIandSortGameResultsBy:nil ascending:NO];
-	}
-	else if (buttonIndex == 1)
-	{
+        [self.gameResultsTableView reloadData];
+	} else if (buttonIndex == 1) {
         // Do nothing
 	}
 }
 
 - (void)viewDidLoad
 {
-    [self makeItPrettyWithButton:[self resetButton]];
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [self makeItPrettyWithButton:[self resetButton]];
 }
 
-- (void)didReceiveMemoryWarning
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    int count = [[GameResult allGameResultsSortedByProperty:self.sortProperty ascending:self.sortOrderAscending] count];
+    return count ? count : 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    static NSString *simpleTableIdentifier = @"SimpleTableItem";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:simpleTableIdentifier];
+    }
+
+    if ([[GameResult allGameResultsSortedByProperty:self.sortProperty ascending:self.sortOrderAscending] count] == 0) {
+        cell.textLabel.text = @"No scores to view";
+        cell.detailTextLabel.text = @"Please play the game ;)";
+    } else {
+        cell.textLabel.text = [NSString stringWithFormat:@"Score: %i", [[[GameResult allGameResultsSortedByProperty:self.sortProperty ascending:self.sortOrderAscending] objectAtIndex:indexPath.row] score]];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (Duration: %@)", [[[GameResult allGameResultsSortedByProperty:self.sortProperty ascending:self.sortOrderAscending] objectAtIndex:indexPath.row] endDateTimeFormatted], [[[GameResult allGameResultsSortedByProperty:self.sortProperty ascending:self.sortOrderAscending] objectAtIndex:indexPath.row] durationFormatted]];
+    }
+    return cell;
 }
 
 @end

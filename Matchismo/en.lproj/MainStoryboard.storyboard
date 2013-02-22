@@ -170,11 +170,6 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Score: 25 (1/22/13 4:00pm, 35s)" translatesAutoresizingMaskIntoConstraints="NO" id="kmv-Y5-jLz">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ep-Oe-4Qg">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Date">
@@ -230,33 +225,38 @@
                                     <action selector="resetGameResults:" destination="rz8-fk-BRW" eventType="touchUpInside" id="shs-Ds-9AL"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Dcq-5e-TSC">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="rz8-fk-BRW" id="Xsd-T8-iw3"/>
+                                    <outlet property="delegate" destination="rz8-fk-BRW" id="lua-NI-6IJ"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.1827791765" green="0.1827791765" blue="0.1827791765" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="2gv-dI-COJ" secondAttribute="trailing" constant="20" symbolic="YES" type="user" id="21R-T0-IsE"/>
-                            <constraint firstItem="cfb-bn-5Bt" firstAttribute="top" secondItem="kmv-Y5-jLz" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="Exk-rd-JWH"/>
-                            <constraint firstItem="qkW-RO-Y7d" firstAttribute="top" secondItem="kmv-Y5-jLz" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="Ibr-YW-Sbn"/>
-                            <constraint firstItem="kmv-Y5-jLz" firstAttribute="leading" secondItem="x4J-cS-UrJ" secondAttribute="leading" type="default" id="JMA-Mb-zkd"/>
-                            <constraint firstItem="kmv-Y5-jLz" firstAttribute="top" secondItem="x4J-cS-UrJ" secondAttribute="top" type="user" id="Jcn-2C-mA4"/>
+                            <constraint firstItem="2gv-dI-COJ" firstAttribute="top" secondItem="Dcq-5e-TSC" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="5dJ-WV-IYF"/>
+                            <constraint firstItem="Dcq-5e-TSC" firstAttribute="trailing" secondItem="x4J-cS-UrJ" secondAttribute="trailing" type="default" id="ILV-cq-jkt"/>
                             <constraint firstItem="8ep-Oe-4Qg" firstAttribute="leading" secondItem="x4J-cS-UrJ" secondAttribute="leading" priority="1" constant="20" symbolic="YES" type="user" id="KYs-LT-zQq"/>
                             <constraint firstItem="cfb-bn-5Bt" firstAttribute="leading" secondItem="8ep-Oe-4Qg" secondAttribute="trailing" constant="8" symbolic="YES" type="user" id="OnR-Jr-Tcs"/>
                             <constraint firstAttribute="bottom" secondItem="qkW-RO-Y7d" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="SH0-ia-pVU"/>
-                            <constraint firstItem="8ep-Oe-4Qg" firstAttribute="top" secondItem="kmv-Y5-jLz" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="WJu-Ju-3Z1"/>
                             <constraint firstAttribute="bottom" secondItem="8ep-Oe-4Qg" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="X8j-Ng-7HH"/>
-                            <constraint firstItem="2gv-dI-COJ" firstAttribute="top" secondItem="kmv-Y5-jLz" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="glr-ID-Q9R"/>
+                            <constraint firstItem="Dcq-5e-TSC" firstAttribute="leading" secondItem="x4J-cS-UrJ" secondAttribute="leading" type="default" id="hrP-sH-7F2"/>
                             <constraint firstItem="2gv-dI-COJ" firstAttribute="leading" secondItem="qkW-RO-Y7d" secondAttribute="trailing" constant="8" symbolic="YES" type="user" id="igM-ak-AEN"/>
-                            <constraint firstItem="kmv-Y5-jLz" firstAttribute="trailing" secondItem="x4J-cS-UrJ" secondAttribute="trailing" type="default" id="mFg-3y-abz"/>
+                            <constraint firstItem="Dcq-5e-TSC" firstAttribute="top" secondItem="x4J-cS-UrJ" secondAttribute="top" type="default" id="n3U-f6-bUE"/>
                             <constraint firstItem="qkW-RO-Y7d" firstAttribute="leading" secondItem="cfb-bn-5Bt" secondAttribute="trailing" constant="8" symbolic="YES" type="user" id="nah-gG-2O0"/>
                             <constraint firstItem="2gv-dI-COJ" firstAttribute="baseline" secondItem="8ep-Oe-4Qg" secondAttribute="baseline" type="user" id="oyL-OU-Tyc"/>
                             <constraint firstItem="2gv-dI-COJ" firstAttribute="baseline" secondItem="qkW-RO-Y7d" secondAttribute="baseline" type="user" id="rMl-G6-z28"/>
                             <constraint firstAttribute="bottom" secondItem="cfb-bn-5Bt" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="sQK-UO-pvc"/>
                             <constraint firstAttribute="bottom" secondItem="2gv-dI-COJ" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="uyn-kn-FHk"/>
                             <constraint firstItem="2gv-dI-COJ" firstAttribute="baseline" secondItem="cfb-bn-5Bt" secondAttribute="baseline" type="user" id="vBs-z4-WS3"/>
+                            <constraint firstItem="8ep-Oe-4Qg" firstAttribute="top" secondItem="Dcq-5e-TSC" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="wjI-z8-x6j"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Game Scores" image="TabBarGameScores.png" id="x3b-5x-FeA"/>
                     <connections>
-                        <outlet property="display" destination="kmv-Y5-jLz" id="CDx-B2-jNo"/>
+                        <outlet property="gameResultsTableView" destination="Dcq-5e-TSC" id="S8k-Sj-dtJ"/>
                         <outlet property="resetButton" destination="2gv-dI-COJ" id="KuF-EP-WLL"/>
                     </connections>
                 </viewController>
